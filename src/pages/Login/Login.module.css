@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  height: 160vh;
+
+}
+
+.left {
+  flex: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E8F5E9; /* verde clarinho */
+}
+
+.right {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #1B5E20; /* texto escuro */
+  background: linear-gradient(
+    135deg,
+    #A5D6A7 0%,  /* verde médio */
+    #C8E6C9 100% /* verde clarinho */
+  );
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: auto;
+  gap: 15px;
+}

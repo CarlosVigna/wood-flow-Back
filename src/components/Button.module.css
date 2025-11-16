@@ -1,0 +1,20 @@
+/* Button.module.css */
+.button {
+  padding: 10px 20px;
+  background-color: #2E7D32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background-color: #66BB6A;
+}
+
+.button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
