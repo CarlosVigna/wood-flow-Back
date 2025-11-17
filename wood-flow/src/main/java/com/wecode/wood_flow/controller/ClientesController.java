@@ -20,6 +20,7 @@ public class ClientesController {
     @GetMapping
     public List<ClientesResponseDTO> getall(){
 
+
         List<ClientesResponseDTO> clientesList = repository.findAll().stream().map(ClientesResponseDTO::new).toList();
         return clientesList;
     }
