@@ -1,35 +1,47 @@
-package com.wecode.wood_flow.controller;
-
-
-import com.wecode.wood_flow.dto.ClientesResponseDTO;
-import com.wecode.wood_flow.entity.Clientes;
-import com.wecode.wood_flow.repositories.ClientesRepository;
-import com.wecode.wood_flow.request.ClientesRequestDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 @RestController
 @RequestMapping("/clientes")
 public class ClientesController {
 
-    @Autowired
-    private ClientesRepository repository;
+    private final ClientesService service;
 
-    @GetMapping
-    public List<ClientesResponseDTO> getall(){
-
-
-        List<ClientesResponseDTO> clientesList = repository.findAll().stream().map(ClientesResponseDTO::new).toList();
-        return clientesList;
+    public ClientesController(ClientesService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public void saveClientes(@RequestBody ClientesRequestDTO data){
-        Clientes clientesData = new Clientes(data);
-        repository.save(clientesData);
-        return;
+    public ResponseEntity<ClientesResponseDTO> create(@Valid @RequestBody ClientesRequestDTO dto) {
+        ClientesResponseDTO response = service.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientesResponseDTO> getById(@PathVariable Long id){
+        Clientes cliente = service.buscarPorId(id);
+        ClientesResponseDTO response = new ClientesResponseDTO(cliente);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ClientesResponseDTO>> getAll() {
+        List<Clientes> clientes = service.buscarTodos();
+        List<ClientesResponseDTO> response = clientes.stream()
+                .map(ClientesResponseDTO::new)
+                .toList();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientesResponseDTO> updateById(
+            @PathVariable Long id,
+            @RequestBody ClientesRequestDTO dto) {
+
+        ClientesResponseDTO response = service.update(id, dto);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
