@@ -1,8 +1,15 @@
+package com.wecode.wood_flow.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "fornecedores")
-@Getter 
+@Getter
 @Setter
 
-public class Fornecedor extends Pessoa {
+public class Fornecedores extends Pessoa {
     private String cnpj;
 }

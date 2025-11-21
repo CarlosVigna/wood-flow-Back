@@ -1,12 +1,12 @@
-package com.wecode.wood_flow.request;
+package com.wecode.wood_flow.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import com.wecode.wood_flow.enums.TipoPessoa;
 
 public record ClientesRequestDTO(
-        @NotBlank String nome,
-        @NotBlank String documento,
+        String nome,
+        String documento,
         String telefone,
         String email,
-        String endereco
+        String endereco,
+        TipoPessoa tipo
 ) {}

@@ -1,22 +1,21 @@
-package com.wecode.wood_flow.entity;
+package com.wecode.wood_flow.entity.produtos;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@MappedSuperclass
+@Entity
+@Table(name = "etapas")
 @Getter
 @Setter
-public abstract class Pessoa {
+public class Etapas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idEtapa;
 
     @Column(nullable = false)
     private String nome;
 
-    private String telefone;
-    private String email;
-    private String endereco;
+    private String descricao;
 }
