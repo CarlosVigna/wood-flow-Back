@@ -12,7 +12,7 @@ public class Etapas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEtapa;
+    private Long id;
 
     @Column(nullable = false)
     private String nome;
