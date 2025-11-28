@@ -110,9 +110,13 @@ public class ProdutosService {
         Produtos filho = buscarEntity(idFilho);
 
         Bom bom = new Bom();
-        bom.setId(new BomId(idPai, idFilho));
+
+        BomId bomId = new BomId(idPai, idFilho);
+        bom.setId(bomId);
+
         bom.setProdutoPai(pai);
         bom.setProdutoFilho(filho);
+
         bom.setQuantidade(quantidade);
 
         return bomRepository.save(bom);

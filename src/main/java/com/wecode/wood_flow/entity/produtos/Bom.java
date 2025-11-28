@@ -1,30 +1,34 @@
 package com.wecode.wood_flow.entity.produtos;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
+@Data
 @Entity
 @Table(name = "bom")
-@Getter
-@Setter
 public class Bom {
 
     @EmbeddedId
     private BomId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idProdutoPai")
-    @JoinColumn(name = "idProdutoPai")
     private Produtos produtoPai;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idProdutoFilho")
-    @JoinColumn(name = "idProdutoFilho")
     private Produtos produtoFilho;
 
-    @Column(nullable = false)
     private BigDecimal quantidade;
+
+    public Bom() {}
+
+    public Bom(Produtos pai, Produtos filho, BigDecimal quantidade) {
+        this.id = new BomId(pai.getId(), filho.getId());
+        this.produtoPai = pai;
+        this.produtoFilho = filho;
+        this.quantidade = quantidade;
+    }
 }

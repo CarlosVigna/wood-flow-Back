@@ -70,10 +70,19 @@ public class ProdutosController {
                 .body(new ProdutoEtapaResponseDTO(etapa));
     }
 
-    @PostMapping("/{idPai}/{idFilho}/componentes")
-    public ResponseEntity<BomResponseDTO> adicionarComponente(@PathVariable Long idPai, @PathVariable Long idFilho, @RequestBody BomRequestDTO dto){
-        Bom componente = service.adicionarComponente(idPai, idFilho, dto.quantidade());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new BomResponseDTO(componente));
+    @PostMapping("/componentes")
+    public ResponseEntity<BomResponseDTO> adicionarComponente(
+            @RequestBody BomRequestDTO dto) {
+
+        Bom componente = service.adicionarComponente(
+                dto.idPai(),
+                dto.idFilho(),
+                dto.quantidade()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new BomResponseDTO(componente));
     }
 
     @PostMapping("/{idPai}/{idEtapa}/{idFilho}/materialEtapa")
